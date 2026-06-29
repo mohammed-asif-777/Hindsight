@@ -501,5 +501,4 @@ UTF-8 encoding is configured in all file operations. If issues persist, set `PYT
 ## Team
 
 Built for **CHAKRAVYUHA 1.0** National Hackathon (24-25 March 2026)
-#   H i n d s i g h t  
- 
+#
