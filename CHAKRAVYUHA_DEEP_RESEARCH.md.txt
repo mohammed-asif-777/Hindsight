@@ -1,0 +1,461 @@
+﻿# Chakravyuha — Deep Market & Technical Research Report
+
+
+---
+
+## 1. Executive Summary
+
+Chakravyuha targets the intersection of three massive gaps in India: **legal illiteracy** (80%+ of 1.4B population), **language exclusion** (legal system operates in English while hundreds of millions speak only regional dialects), and **access poverty** (only 15 judges per million, 52.5M pending cases). The market opportunity is real — India's legal AI market was USD 29.5M in 2024 growing at 23% CAGR to USD 106.3M by 2030, within a broader legal tech market of USD 1.25B by 2030.
+
+**However, no existing product comes close to solving the full Chakravyuha problem statement.** The closest is OpenNyAI's Jugalbandi — but it lacks dialect-level ASR, agentic form-filling, auto-escalation, and offline mode. Several hackathon-grade GitHub repos exist for IPC RAG chatbots, but none achieve the accuracy, dialect coverage, or agentic capabilities required.
+
+**Decision**: This is a greenfield opportunity with strong social impact. The hackathon team should build on existing open-source components (Jugalbandi architecture, AI4Bharat/Sarvam models, OpenNyAI legal NLP) rather than starting from scratch.
+
+---
+
+## 2. Market Size & Opportunity
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| India Legal AI Market (2024) | USD 29.5M | Grand View Research |
+| India Legal AI Market (2030 est.) | USD 106.3M (23% CAGR) | Grand View Research |
+| India Legal Tech Market (2023) | USD 464.6M | Grand View Research |
+| India Legal Tech Market (2030 est.) | USD 1,253.1M (15.2% CAGR) | Grand View Research |
+| AI-Powered LegalTech + Compliance (2024) | USD 1.5B | Ken Research |
+| Global Legal AI Market (2024) | ~USD 1.7B | Emergen Research |
+
+### Bottom-Up TAM/SAM/SOM Estimate
+
+- **TAM**: ~800M Indians eligible for free legal aid × potential SaaS/gov-funded model = massive addressable population
+- **SAM**: ~200M smartphone users in underserved communities who lack legal access
+- **SOM** (realistic year 1): 1-5M users via government partnerships (Tele-Law integration, CSC network)
+
+---
+
+## 3. Access to Justice Gap — The Problem is Enormous
+
+| Statistic | Number | Source |
+|-----------|--------|--------|
+| Pending court cases (2025 est.) | **52.5 million** (~525 lakh) | India Data Map |
+| Subordinate court backlog | ~450 lakh cases | India Data Map |
+| High Court backlog | ~62 lakh cases | India Data Map |
+| Judge-to-population ratio | **21 per million** (recommended: 50) | India Justice Report 2025 |
+| Legal aid availed (2023-24) | Only 15.5 lakh despite **80% eligibility** | Insights on India |
+| Rural legal aid access | Only **15%** | PRS Legislative Research |
+| Legal aid budget share | **<1%** of total justice budget | India Justice Report 2025 |
+| NALSA spending per capita | Rs 2-16 across states | NALSA Statistics |
+| Tele-Law beneficiaries | **2.1 crore** (21M) by Feb 2025 | Tele-Law Portal |
+| Worst backlog: Uttar Pradesh | 117 lakh cases alone | India Data Map |
+
+**Key insight**: 80% of India's population is *eligible* for free legal aid, but only 15.5 lakh actually received it. The gap is not just legal — it's linguistic and technological.
+
+---
+
+## 4. Government Initiatives & Tailwinds
+
+- **Tele-Law Scheme**: Reached 2.1 crore beneficiaries via Common Service Centres (CSCs), 39% women, 31% OBC/SC. Pre-litigation advice via video/phone. *This is the natural distribution partner for Chakravyuha.*
+- **eCourts Project**: Phase III underway for computerizing all courts; Supreme Court AI case management processed **4.7M cases annually** in 2024
+- **Legal Services Authorities Act (2024 amendment)**: Explicitly recognizes AI tools as acceptable aids in legal practice
+- **DPDP Act 2023 + Rules 2025**: Full enforcement from 13 May 2027; requires consent, data minimization, purpose limitation — directly impacts Chakravyuha's privacy architecture
+- **No AI-specific legislation yet**: MeitY's AI Governance Guidelines are advisory, not law. Feb 2026 IT Rules amendments target synthetic content but not legal AI specifically
+- **Bar Council**: No explicit prohibition on AI giving legal *information* (vs. legal *advice*) — a critical distinction for Chakravyuha
+
+---
+
+## 5. Competitive Landscape
+
+### 5.1 Direct Competitors (India)
+
+| Product | What It Does | Voice? | Dialects? | Agentic? | Offline? | Gaps vs Chakravyuha |
+|---------|-------------|--------|-----------|----------|----------|---------------------|
+| **Jugalbandi** (OpenNyAI) | WhatsApp chatbot for gov schemes + legal info; text + voice; Bhashini models | Yes (via Bhashini) | Standard languages only, no dialect ASR | No form-filling | No | No dialect ASR, no agentic actions, no case tracking, no auto-escalation |
+| **Haqdarshak** | Rights awareness + scheme enrollment; field worker model | No | No | Manual enrollment assist | No | Not AI-first, no legal advice, no voice |
+| **Vakilsearch / Zolvit** ($12M raised) | Incorporation, trademark, GST, compliance for SMEs | No | English/Hindi | No | No | Enterprise focus, not citizen legal aid |
+| **Lawrato** | Lawyer marketplace; search by practice area, language | No | No | No | No | Marketplace, not AI assistant |
+| **Legistify** | Enterprise legal ops, contract management, litigation tracking | No | No | No | No | Enterprise B2B, not citizen-facing |
+| **JIVA** (OpenNyAI) | Judge's assistant for law search | No | No | No | No | For judges, not citizens |
+
+### 5.2 International Comparators
+
+| Product | What It Does | India Relevance |
+|---------|-------------|-----------------|
+| **Harvey AI** ($8B valuation, $160M Series F Dec 2025) | LLM for law firms; research + drafting | Enterprise-only, English, no voice, no Indian law |
+| **DoNotPay** | Consumer chatbot for tickets/refunds | US-only; hit with class action lawsuit for unauthorized practice of law |
+| **CoCounsel** (Thomson Reuters) | Legal research AI | Enterprise English-only |
+| **Spellbook** | Contract drafting AI | English, no Indian law |
+
+### 5.3 Positioning Gaps — What NO Existing Product Does
+
+| Chakravyuha Feature | Closest Existing | Gap |
+|---------------------|-----------------|-----|
+| Dialect-level ASR (Bhojpuri, Tulu, Chhattisgarhi) | Jugalbandi (standard langs only) | **No product handles dialectal variation** |
+| Agentic form-filling on gov portals | None | **Completely unaddressed** |
+| Auto-escalation to police/NALSA | None | **No automated emergency routing** |
+| Offline legal briefing | None | **All require internet** |
+| End-to-end case tracking | Legistify (enterprise only) | **No citizen-facing tracker exists** |
+| Defence strategy generation | LawGPT (basic IPC RAG) | **No product surfaces defence strategies proactively** |
+
+---
+
+## 6. Existing GitHub Repos Analysis
+
+**None solve the full Chakravyuha problem.** Here's what exists:
+
+| Repo | What It Does | What's Missing |
+|------|-------------|----------------|
+| **OpenNyAI/Jugalbandi-Manager** | Full conversational chatbot platform; WhatsApp/web; voice via Bhashini; multi-language | No dialect ASR, no agentic actions, no IPC/BNS RAG, no form-filling, no escalation |
+| **OpenNyAI/Opennyai** | NER on Indian legal texts, judgment structuring, rhetorical roles | NLP pipeline only, not a chatbot or voice assistant |
+| **Kopika0208/AskLegal.ai** | RAG over IPC with inLegalBERT + FAISS + Gemini; chatbot + judgment prediction | English only, no voice, no multilingual, no dialect, no agentic, no BNS |
+| **harshitv804/LawGPT** | RAG over IPC with Streamlit + LangChain + TogetherAI | English only, IPC only (not BNS), no voice, no dialect, no agentic |
+| **Yashism/IPC-Laws-Assistant** | AI chatbot for crime case analysis + IPC section identification; multilingual | No voice, no dialect ASR, no agentic, no form-filling, basic accuracy |
+| **lawglance/lawglance** | RAG-based legal assistant with voice commands + multilingual | Early stage, no dialect support, no agentic actions |
+| **Anish-2005/LawAI-PrivacyV** | Law enforcement focused; speech-to-text; multi-language (SIH 2024) | For police not citizens, ML-only (no LLM), no agentic |
+| **Sreyan88/Multilingual-Indic-ASR** | Multilingual Indic ASR research | ASR only, no legal domain |
+| **AI4Bharat/vistaar** | Indian language ASR benchmarks + IndicWhisper | Benchmark/model, not an application |
+| **law-ai/InLegalBERT** (HuggingFace) | BERT fine-tuned on Indian legal corpus | Embedding model only, not a chatbot |
+
+**Bottom line**: The best existing pieces are Jugalbandi (platform architecture), OpenNyAI (legal NLP), and individual hackathon IPC RAG bots — but none achieve >85% legal section accuracy on dialect voice input with agentic capabilities.
+
+---
+
+## 7. Technical Feasibility Assessment
+
+### 7.1 Speech (ASR) — Available Models
+
+| Model/Platform | Languages | Dialects? | Open Source? | Cost | Notes |
+|---------------|-----------|-----------|-------------|------|-------|
+| **AI4Bharat IndicWhisper** | 12 Indian langs, 10,700+ hrs training | Standard only | Yes (MIT) | Free | Lowest WER on 39/59 Vistaar benchmarks; fine-tuned Whisper |
+| **AI4Bharat IndicConformer** (600M) | 12+ Indian langs | Limited dialect | Yes | Free | Latest model; NeMo-based Conformer |
+| **Sarvam AI ASR** | 22 Indian langs | Regional accents | API (freemium) | Free tier | Streaming ASR, code-mixed support |
+| **Meta MMS** | 1,107 languages | **Yes**: Bhojpuri (bho), Chhattisgarhi (hne), Tulu (tcy), Awadhi (awa) | Yes (CC-BY-NC) | Free | Only option for target dialects; WER 30-45% on dialects |
+| **OpenAI Whisper large-v3** | Hindi, Tamil, Bengali, etc. | Poor on dialects | Yes (MIT) | Free | Good for standard langs, degrades on Bhojpuri/Tulu |
+| **Google Speech-to-Text** | 30+ Indian locales | Bhojpuri (bho-IN) only | No (API) | $0.006/15s, 60min free | Best quality but paid |
+| **Vakyansh (EkStep)** | Multiple Indian | Limited | Yes | Free | Older models, CLSRIL-23 pretrained |
+
+### 7.2 Dialect WER Reality
+
+| Dialect | Best Available ASR | Estimated WER | Notes |
+|---------|-------------------|---------------|-------|
+| Standard Hindi | IndicWhisper | <10% | Well-resourced |
+| **Bhojpuri** | Meta MMS | **30-40%** | Only realistic option; Google STT also has bho-IN |
+| **Chhattisgarhi** | Meta MMS | **35-45%** | Very limited training data; RESPIN has 250hrs dataset |
+| **Tulu** | Meta MMS | **35-45%** | Dravidian, very low resource |
+| **Awadhi** | Meta MMS | **35-45%** | Often confused with Hindi |
+| **Madurai Tamil** | IndicWhisper (as Tamil) | **20-30%** | Dialectal variation; no dialect-specific model |
+
+**Target**: <20% WER on 3+ dialects — achievable for Hindi dialects with confirmation UI, very hard for Tulu.
+
+**Recommended Cascade Strategy**:
+1. Primary: **IndicWhisper** for 12 major languages (best WER)
+2. Fallback: **Meta MMS** for dialects (Bhojpuri, Chhattisgarhi, Tulu, Awadhi)
+3. Optional: **Google STT** as cloud backup for demo
+
+### 7.3 Text-to-Speech (TTS)
+
+| Model | Languages | Dialects? | Quality | Open Source? |
+|-------|-----------|-----------|---------|-------------|
+| **AI4Bharat IndicTTS** | 13 Indian langs | No | Good (MOS 3.5-4.0) | Yes (MIT) |
+| **Sarvam Bulbul-V2** | 11 Indian langs | "Authentic regional accents" | Best available | API (freemium) |
+| **Google Cloud TTS** | 10+ Indian langs | No | High (WaveNet) | No ($4-16/1M chars) |
+| **Meta MMS TTS** | 1,107 langs inc. Bhojpuri, Tulu, etc. | **Yes** | Basic/robotic (MOS 2.5-3.5) | Yes (CC-BY-NC) |
+| **Piper TTS** | Hindi available | No | Decent, fast | Yes (MIT) |
+| **eSpeak-ng** | Many Indian langs | Some | Robotic | Yes | Tiny (~2MB), good for offline |
+
+**Recommendation**: Sarvam Bulbul-V2 for major langs, Meta MMS TTS for dialects, Piper for offline fallback.
+
+### 7.4 LLM Options (No Paid Commercial APIs)
+
+| Model | Params | Indian Langs | Open Source | Notes |
+|-------|--------|-------------|-------------|-------|
+| **Sarvam-1** | 2B | 10 Indic langs | Yes | Small, can run on modest hardware |
+| **Sarvam-M** | 24B | Indian + English | Yes (weights) | Best balance of capability + Indian lang support |
+| **Sarvam-105B** | 105B | 22 Indian langs, 128K context | Yes (weights) | Top capability but needs GPU server |
+| **Airavata** (AI4Bharat) | 7B | Hindi + tasks | Yes | Best open-source Hindi instruction-following |
+| **OpenHathi** (Sarvam) | 7B | Hindi, Hinglish | Yes | Good Hindi vocabulary |
+| **Llama 3.1 8B** | 8B | Limited Indic | Yes | Good reasoning, limited Indic |
+| **Gemma 2 9B** | 9B | Some Indic | Yes | Decent Hindi |
+
+**2GB RAM Android constraint**: No LLM runs locally on 2GB RAM. Solution: PWA frontend → server-side inference on free-tier hosting.
+
+### 7.5 Legal RAG Architecture
+
+#### Corpus Sources
+
+| Resource | Coverage | Access |
+|----------|----------|--------|
+| **Indian Kanoon** | All courts, all acts, SC/HC judgments | Web scraping (no official API) |
+| **indiacode.nic.in** | BNS 2023, BNSS 2023, BSA 2023, all Central/State Acts | Public, needs scraping |
+| **ILDC Benchmark** | 34K Supreme Court judgments with decisions | Open dataset (GitHub) |
+| **OpenNyAI Legal NER** | 9,435 judgment sentences + 1,560 preambles | Open source |
+| **InLegalBERT** | BERT fine-tuned on Indian legal text | HuggingFace |
+| **IL-TUR** | Multi-task Indian legal NLP benchmark | Research |
+
+#### Chunking Strategy
+
+```
+Document Structure:
+├── Act (e.g., BNS 2023)
+│   ├── Chapter (e.g., Chapter VI - Of Offences Against the State)
+│   │   ├── Section (e.g., Section 152 - Waging war against India)
+│   │   │   ├── Sub-section
+│   │   │   ├── Explanation
+│   │   │   └── Illustrations
+```
+
+Section-level chunking with metadata:
+```json
+{
+  "section_id": "BNS-103",
+  "act": "Bharatiya Nyaya Sanhita, 2023",
+  "replaces": "IPC-302",
+  "effective_date": "2024-07-01",
+  "jurisdiction": "Central",
+  "chapter": "VI - Of Offences Affecting the Human Body",
+  "punishment": "Death or imprisonment for life, and fine",
+  "cognizable": true,
+  "bailable": false,
+  "court": "Court of Session"
+}
+```
+
+#### RAG Stack
+
+- **Embeddings**: InLegalBERT or BGE-base fine-tuned
+- **Vector DB**: ChromaDB (simplest for hackathon) or FAISS
+- **Retriever**: Hybrid BM25 + Dense embeddings
+- **Reranker**: cross-encoder/ms-marco-MiniLM-L-6-v2
+- **IPC→BNS mapping table**: Cross-reference old sections to new
+
+### 7.6 Agentic Browser Automation
+
+**Playwright** (recommended over Puppeteer):
+- Python support (aligns with ML stack)
+- Better auto-waiting for slow gov portals
+- Multi-browser support
+- Better iframe handling
+
+**Government Portal Challenges**:
+- **eCourts**: CAPTCHA on search, no API, server-rendered
+- **CPGRAMS**: OTP-based auth, complex multi-step forms
+- **Parivahan**: Heavy CAPTCHA, aggressive session timeouts (5-10 min)
+
+**CAPTCHA Handling**:
+1. User-assisted (most ethical): show to user, forward response
+2. Audio CAPTCHA + Whisper ASR (accessibility-compliant)
+3. Simple OCR with pytesseract for basic text CAPTCHAs (70-90% success)
+
+**OTP-Pause Pattern**:
+```python
+# Pseudocode
+async def gov_portal_flow(page, user_context):
+    await page.goto("https://portal.gov.in/")
+    await page.fill("#field", user_context.data)
+    await page.click("#send_otp")
+
+    # PAUSE — notify user via WebSocket
+    otp = await wait_for_user_input(
+        prompt="Enter OTP sent to your phone",
+        timeout=300,
+        channel=user_context.websocket
+    )
+
+    await page.fill("#otp_field", otp)
+    await page.click("#verify")
+    result = await page.query_selector(".result")
+    return await result.inner_text()
+```
+
+### 7.7 Deployment Architecture
+
+```
+┌─────────────────────────────────┐
+│   2GB Android Device (PWA)      │
+├─────────────────────────────────┤
+│ - Lightweight UI (Preact <5MB)  │
+│ - Audio recording (MediaRecorder)│
+│ - Cached legal briefings (IDB)  │
+│ - Offline first-aid legal info  │
+│ - Service Worker                │
+└──────────┬──────────────────────┘
+           │ HTTPS / WebSocket
+┌──────────▼──────────────────────┐
+│   Server (HF Spaces / Modal)    │
+├─────────────────────────────────┤
+│ - ASR (IndicWhisper / MMS)      │
+│ - LLM (Sarvam-M / Airavata)    │
+│ - TTS (Bulbul-V2 / MMS)        │
+│ - Legal RAG (ChromaDB + FAISS)  │
+│ - Playwright automation         │
+└─────────────────────────────────┘
+```
+
+**Free Hosting Stack**:
+
+| Component | Host | Cost |
+|-----------|------|------|
+| PWA frontend | Vercel / Netlify / GitHub Pages | Free |
+| API server (FastAPI) | Railway ($5 free) or Render | Free |
+| LLM inference | HuggingFace Spaces (ZeroGPU) | Free |
+| ASR/TTS | Same HF Space or separate | Free |
+| Vector DB | Embedded ChromaDB on API server | Free |
+| Playwright | Railway or Render | Free |
+| **Total** | | **$0** |
+
+---
+
+## 8. Risks & Caveats
+
+| Risk | Severity | Mitigation |
+|------|----------|-----------|
+| **Legal hallucination** | CRITICAL | Strict RAG grounding; reject if retrieval score < threshold; cite exact sections; never generate legal claims from LLM alone |
+| **Dialect ASR accuracy** | HIGH | Start with 2-3 best-supported dialects; set honest WER expectations; use text fallback + confirmation UI |
+| **Unauthorized practice of law** | HIGH | Frame as "legal information" not "legal advice"; add disclaimers; route to human lawyers for actionable decisions |
+| **DPDP Act compliance** | MEDIUM | Zero-retention by design; explicit consent flows; no data stored without user permission |
+| **Bad actor misuse** | MEDIUM | Intent classification layer; refuse to generate offense strategies; detect aggressor language patterns |
+| **Stale legal corpus** | MEDIUM | IPC→BNS transition (July 2024); must handle both with date-aware routing |
+| **Gov portal automation brittleness** | MEDIUM | Portals change frequently; needs monitoring + graceful degradation |
+| **"No paid APIs" constraint** | LOW-MED | Sarvam offers free tier; HuggingFace Spaces free T4; but scale is limited |
+| **LLM hosting cold start** | MEDIUM | Free-tier GPU has 30-60s cold start; keep Space active or use smaller model |
+
+---
+
+## 9. Hackathon Build Recommendation — What to Build in 24 Hours
+
+### Priority Stack
+
+**1. MUST HAVE (Demo-critical):**
+- Voice input in 2-3 languages (Hindi + Tamil + 1 dialect like Bhojpuri) via Sarvam ASR API or IndicWhisper
+- Legal RAG over BNS/IPC sections with >85% accuracy on curated test scenarios
+- Step-by-step guidance in plain language via Sarvam-M LLM
+- TTS response in user's language via Sarvam Bulbul-V2
+- Basic Streamlit/Gradio PWA frontend
+
+**2. SHOULD HAVE (Differentiator):**
+- Browser agent demo on Parivahan portal (Playwright)
+- Defence strategy surfacing (Rule 139 example)
+- Case tracker with session persistence
+
+**3. NICE TO HAVE (If time permits):**
+- Auto-escalation simulation (Twilio free tier → NALSA number)
+- Offline cached legal briefings
+- 3+ dialect WER report
+
+### Recommended Tech Stack Summary
+
+| Layer | Technology | Rationale |
+|-------|-----------|-----------|
+| **ASR (major languages)** | IndicWhisper / Sarvam ASR | Best WER, open source |
+| **ASR (dialects)** | Meta MMS | Only option for Bhojpuri/Tulu/Chhattisgarhi |
+| **TTS (major)** | Sarvam Bulbul-V2 / IndicTTS | Best quality, free tier |
+| **TTS (dialects)** | Meta MMS TTS | Only option, basic quality |
+| **LLM** | Sarvam-M (24B) or Airavata (7B) | Open source, free, good Indic |
+| **Legal RAG** | ChromaDB + InLegalBERT + BM25 | Simple, effective, free |
+| **Legal corpus** | BNS/BNSS from indiacode.nic.in + ILDC | Most current Indian law |
+| **Browser automation** | Playwright (Python) | Best for gov portals |
+| **Frontend** | PWA (Preact + Service Worker) | Works on 2GB Android |
+| **Backend** | FastAPI (Python) | Unifies ML stack |
+| **Hosting** | HF Spaces (GPU) + Vercel (frontend) + Railway (API) | All free tier |
+
+### Agent Pipeline Architecture
+
+```
+Voice Input → Language/Dialect Detection
+    → Sarvam ASR / Meta MMS (voice→text)
+    → Intent Classification (Sarvam-M)
+    → Legal RAG (InLegalBERT + FAISS over BNS/IPC)
+    → Response Generation (Sarvam-M with grounded sections)
+    → Defence Strategy Check (pattern-matched legal provisions)
+    → Sarvam Bulbul-V2 / Meta MMS TTS (text→voice in dialect)
+    → [If action needed] Playwright Agent for gov portal
+    → [If urgent] Twilio for emergency escalation
+    → Case Tracker (persist in DB, poll for updates)
+```
+
+---
+
+## 10. Open-Source Building Blocks to Reuse
+
+| Component | Repo/Link | Use For |
+|-----------|-----------|---------|
+| Jugalbandi-Manager | github.com/OpenNyAI/Jugalbandi-Manager | Chatbot platform architecture, WhatsApp integration |
+| OpenNyAI NLP | github.com/OpenNyAI/Opennyai | Legal NER, judgment structuring |
+| InLegalBERT | huggingface.co/law-ai/InLegalBERT | Legal text embeddings for RAG |
+| AI4Bharat IndicWhisper | huggingface.co/ai4bharat | ASR for scheduled Indian languages |
+| AI4Bharat IndicConformer | huggingface.co/ai4bharat/indic-conformer-600m-multilingual | Latest ASR model |
+| Meta MMS | huggingface.co/facebook/mms-1b-all | Dialect ASR + TTS |
+| Sarvam AI | sarvam.ai/models | ASR, TTS (Bulbul-V2), LLM (Sarvam-M) |
+| RESPIN Chhattisgarhi | (via Springer) | Dialect ASR training data (250hrs) |
+| ILDC Dataset | github.com/Exploration-Lab/ILDC | 34K Supreme Court judgments |
+| Vakyansh | github.com/Open-Speech-EkStep/vakyansh-models | Additional Indic ASR models |
+| AI4Bharat IndicNLP Catalog | github.com/AI4Bharat/indicnlp_catalog | Comprehensive Indic NLP resources |
+| Piper TTS | github.com/rhasspy/piper | Lightweight offline TTS |
+| ChromaDB | trychroma.com | Vector database for RAG |
+| Playwright | playwright.dev | Browser automation |
+
+---
+
+## 11. Sources
+
+### Market & Statistics
+- Grand View Research — India Legal AI Market: https://www.grandviewresearch.com/horizon/outlook/legal-ai-market/india
+- Grand View Research — India Legal Tech Market: https://www.grandviewresearch.com/horizon/outlook/legal-technology-market/india
+- Ken Research — India AI LegalTech: https://www.kenresearch.com/india-ai-powered-legaltech-compliance-market
+- Emergen Research — Legal AI Market: https://www.emergenresearch.com/industry-report/legal-ai-market
+- IndiaAI.gov.in — AI-Driven Legal Future 2025: https://indiaai.gov.in/article/india-s-ai-driven-legal-future-opportunities-and-emerging-trends-in-2025
+- Nasscom — Legal Tech 2025: https://community.nasscom.in/communities/tech-good/legal-tech-turning-point-what-2025-has-shown-us-so-far
+
+### Access to Justice
+- India Justice Report 2025: https://lawchakra.in/legal-updates/india-justice-report-2025-judiciary/
+- India Data Map — Pending Cases 2025: https://indiadatamap.com/2025/10/18/pending-court-cases-in-india-2025/
+- NALSA Statistics: https://nalsa.gov.in/statistics/
+- Insights on India — Legal Aid & NALSA: https://www.insightsonindia.com/2025/08/01/legal-aid-and-nalsa/
+- Tele-Law Portal: https://www.tele-law.in/
+- StudyIQ — Judicial Backlog: https://www.studyiq.com/articles/judicial-backlog-in-india/
+
+### Regulatory
+- DPDP Act Compliance Guide (EY): https://www.ey.com/en_in/insights/cybersecurity/decoding-the-digital-personal-data-protection-act-2023
+- India AI Governance Regime: https://www.mondaq.com/india/new-technology/1746114/indias-ai-governance-regime-interplay-of-it-act-dpdp-act-and-sectoral-regulations
+- Chambers — AI 2025 India: https://practiceguides.chambers.com/practice-guides/artificial-intelligence-2025/india/trends-and-developments
+
+### Competitors
+- Harvey AI: https://www.harvey.ai/
+- OpenNyAI / Jugalbandi: https://github.com/OpenNyAI/Jugalbandi-Manager
+- Jugalbandi Docs: https://docs.jugalbandi.opennyai.org/
+- Microsoft — Jugalbandi: https://news.microsoft.com/source/asia/features/with-help-from-next-generation-ai-indian-villagers-gain-easier-access-to-government-services/
+- ABA Journal — AI & Indian Justice: https://www.abajournal.com/web/article/could-generative-ai-help-break-down-language-barriers-plaguing-the-indian-justice-system
+- Inventiva — LegalTech Startups 2026: https://www.inventiva.co.in/trends/top-10-legaltech-startups-in-2026/
+
+### Technology
+- AI4Bharat: https://ai4bharat.iitm.ac.in/
+- AI4Bharat HuggingFace: https://huggingface.co/ai4bharat
+- AI4Bharat Vistaar Benchmark: https://github.com/AI4Bharat/vistaar
+- IndicConformer 600M: https://huggingface.co/ai4bharat/indic-conformer-600m-multilingual
+- Sarvam AI Models: https://www.sarvam.ai/models
+- Sarvam Bulbul-V2 TTS: https://www.analyticsvidhya.com/blog/2025/05/bulbul-v2-by-sarvam/
+- Sarvam-M Blog: https://www.sarvam.ai/blogs/sarvam-m
+- Sarvam-105B: https://www.sarvam.ai/blogs/sarvam-30b-105b
+- Voice of India ASR Benchmark: https://startupnews.fyi/2026/02/17/voice-of-india-reveals/
+- RESPIN Chhattisgarhi ASR: https://link.springer.com/chapter/10.1007/978-3-031-48312-7_14
+- MADASR 2.0 Challenge: https://arxiv.org/html/2511.15418
+- Vakyansh Models: https://github.com/Open-Speech-EkStep/vakyansh-models
+- AI4Bharat IndicNLP Catalog: https://github.com/AI4Bharat/indicnlp_catalog
+- OpenNyAI NLP: https://github.com/OpenNyAI/Opennyai
+- Legal NER (OpenNyAI): https://github.com/Legal-NLP-EkStep/legal_NER
+- InLegalBERT: https://huggingface.co/law-ai/InLegalBERT
+- ILDC Dataset: https://github.com/Exploration-Lab/CJPE
+- IL-TUR Benchmark: https://arxiv.org/html/2407.05399v1
+
+### GitHub Repos (Legal AI)
+- AskLegal.ai: https://github.com/Kopika0208/AskLegal.ai-AI-Legal-Assistant
+- LawGPT: https://github.com/harshitv804/LawGPT
+- IPC Laws Assistant: https://github.com/Yashism/IPC-Laws-Assistant
+- LawGlance: https://github.com/lawglance/lawglance
+- LawAI-PrivacyV (SIH 2024): https://github.com/Anish-2005/LawAI-PrivacyV
+- Pipecat (voice AI framework): https://github.com/pipecat-ai/pipecat
+- TEN Framework: https://github.com/TEN-framework/ten-framework
+- Bolna AI: https://www.bolna.ai/
+
+---
+
+*Report compiled on 24 March 2026. All web-sourced data verified via live search. Some technical benchmarks based on training knowledge through May 2025 — verify latest model releases on HuggingFace.*
+

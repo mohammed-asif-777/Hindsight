@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(git checkout:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(PYTHONIOENCODING=utf-8 python:*)",
+      "Bash(ls:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:docs.sarvam.ai)",
+      "Bash(ollama:*)",
+      "Bash(powershell -Command:*)",
+      "WebFetch(domain:pypi.org)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(gh search:*)",
+      "Bash(gh repo list:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh api:*)",
+      "Bash(npm run dev)",
+      "Bash(npx next dev:*)",
+      "Bash(node_modules/.bin/next dev)",
+      "Bash(npm install)",
+      "Bash(taskkill:*)",
+      "Bash(tasklist:*)",
+      "Bash(for q in \"my license is lost\" \"domestic violence help\" \"someone stole my phone\" \"traffic challan\" \"how to file FIR\" \"cyber fraud on UPI\" \"what are fundamental rights\")",
+      "Bash(do echo \"=== Query: $q ===\")",
+      "Bash(done)",
+      "Bash(where:*)",
+      "Bash(while read pid:*)",
+      "Bash(do taskkill //F //PID $pid)",
+      "Bash(zip:*)"
+    ]
+  }
+}
